@@ -9,7 +9,6 @@ except ImportError:
     from google.adk.skills import models
 
 BASE_PATHS = [
-    pathlib.Path("~/.gemini/jetski/skills"),
     pathlib.Path("~/.gemini/config/skills"),
     pathlib.Path("~/.agents/skills"),
     pathlib.Path(".agents/skills"),

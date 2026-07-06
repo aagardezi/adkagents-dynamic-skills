@@ -17,11 +17,10 @@ When building agentic applications using Google’s Agent Development Kit, agent
 
 This library automatically hooks (monkeypatches) the ADK agent constructors (`google.adk.agents.llm_agent.LlmAgent` and `google.adk.agents.Agent`). When an agent is initialized:
 
-1. **Precedence-Aware Scanning**: It scans four paths in increasing order of precedence (lowest first, meaning higher precedence paths override duplicate skills from lower ones):
-   1. `~/.gemini/jetski/skills` (Global Jetski skills)
-   2. `~/.gemini/config/skills` (Global User configuration skills)
-   3. `~/.agents/skills` (User home directory skills)
-   4. `.agents/skills` (Local workspace directory skills - highest precedence)
+1. **Precedence-Aware Scanning**: It scans paths in increasing order of precedence (lowest first, meaning higher precedence paths override duplicate skills from lower ones):
+   1. `~/.gemini/config/skills` (Global User configuration skills)
+   2. `~/.agents/skills` (User home directory skills)
+   3. `.agents/skills` (Local workspace directory skills - highest precedence)
 2. **Conflict Resolution**: If a skill with the same name exists in multiple search folders, the library keeps only the one from the higher-precedence folder.
 3. **Graceful Loading**: If any individual skill folder fails validation or contains errors, the library reports a warning using `warnings.warn` instead of crashing your agent.
 4. **Dynamic Toolset Injection**: It packages the discovered skills inside a `SkillToolset` and appends it to the agent’s `tools` parameter, preventing duplicate toolset additions.
@@ -39,12 +38,10 @@ graph TD
     C --> D[LlmAgent Instantiated]
     D --> E[discover_skills]
     E --> F[Scan paths in precedence order]
-    F --> G[~/.gemini/jetski/skills]
     F --> H[~/.gemini/config/skills]
     F --> I[~/.agents/skills]
     F --> J[.agents/skills]
-    G --> K(skills_by_name)
-    H --> K
+    H --> K(skills_by_name)
     I --> K
     J --> K
     K --> L[Filter Duplicate Names]
