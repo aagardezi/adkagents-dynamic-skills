@@ -49,7 +49,7 @@ graph TD
     J --> K
     K --> L[Filter Duplicate Names]
     L --> M[Create SkillToolset]
-    M --> N["Safe Inject into kwargs["tools"]"]
+    M --> N["Safe Inject into kwargs['tools']"]
     N --> O[Call Original LlmAgent.__init__]
 ```
 
